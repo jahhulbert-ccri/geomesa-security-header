@@ -12,26 +12,30 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 
 import scala.collection.JavaConverters._
+import scala.util.{Failure, Success, Try}
 
 class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter with Logging {
 
-  override def doFilter(req: ServletRequest, resp: ServletResponse, fc: FilterChain): Unit = {
-    if (SecurityContextHolder.getContext.getAuthentication  == null) {
-      val httpReq = req.asInstanceOf[HttpServletRequest]
-      val headerValue = httpReq.getHeader(getPrincipalHeaderAttribute)
-      logger.debug(s"ProxiedAuthHeader: $getPrincipalHeaderAttribute=$headerValue")
-      if (headerValue != null) {
+  override def doFilter(req: ServletRequest, resp: ServletResponse, fc: FilterChain): Unit =
+    Try {
+       Option(SecurityContextHolder.getContext.getAuthentication).getOrElse {
+        val httpReq = req.asInstanceOf[HttpServletRequest]
+        val headerValue = httpReq.getHeader(getPrincipalHeaderAttribute)
+        logger.debug(s"ProxiedAuthHeader: $getPrincipalHeaderAttribute=$headerValue")
         val userAndCreds = parseHeader(headerValue)
         val gsAuthorities = Collections.singleton(GeoServerRole.ADMIN_ROLE)
-        val result = new PreAuthenticatedAuthenticationToken(userAndCreds._1, userAndCreds._2, gsAuthorities)
-        SecurityContextHolder.getContext.setAuthentication(result)
-      } else {
-        sendError(resp)
+        new PreAuthenticatedAuthenticationToken(userAndCreds._1, userAndCreds._2, gsAuthorities)
       }
+    } match {
+      case Success(result) =>
+        SecurityContextHolder.getContext.setAuthentication(result)
+        fc.doFilter(req, resp)
+      case Failure(ex) =>
+        logger.error("Error setting security context with Proxied Auth Header", ex)
+        sendError(resp)
     }
-    fc.doFilter(req, resp)
-  }
 
+  /** Default implementation is format "user:auth1,auth2,auth3" **/
   def parseHeader(headerValue: String): (String, java.util.List[String]) = {
     val split = headerValue.split(":")
     (split(0), split(1).split(",").toSeq.asJava)
