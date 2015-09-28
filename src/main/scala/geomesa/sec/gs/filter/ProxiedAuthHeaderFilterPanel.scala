@@ -9,5 +9,4 @@ class ProxiedAuthHeaderFilterPanel(id: String, model: IModel[RequestHeaderAuthen
   extends PreAuthenticatedUserNameFilterPanel[RequestHeaderAuthenticationFilterConfig](id, model) {
 
   add(new TextField("principalHeaderAttribute").setRequired(true))
-
 }

@@ -1,1 +1,1 @@
-geomesa.sec.provider.SpringAuthProvider
+geomesa.sec.provider.ProxiedAuthSpringProvider

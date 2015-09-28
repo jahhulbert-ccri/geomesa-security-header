@@ -11,19 +11,20 @@ import org.geoserver.security.impl.GeoServerRole
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 
+import scala.collection.JavaConverters._
+
 class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter with Logging {
 
   override def doFilter(req: ServletRequest, resp: ServletResponse, fc: FilterChain): Unit = {
     if (SecurityContextHolder.getContext.getAuthentication  == null) {
       val httpReq = req.asInstanceOf[HttpServletRequest]
       val headerValue = httpReq.getHeader(getPrincipalHeaderAttribute)
-      logger.trace(s"Principal header $getPrincipalHeaderAttribute value: $headerValue")
+      logger.debug(s"ProxiedAuthHeader: $getPrincipalHeaderAttribute=$headerValue")
       if (headerValue != null) {
-        val parsedInfo = getPrincipalAndCreds(headerValue)
-        val principal: String = parsedInfo._1
-        val creds: IndexedSeq[String] = parsedInfo._2
-        val auths: java.util.Collection[GeoServerRole] = Collections.singleton(GeoServerRole.ADMIN_ROLE)
-        val result = new PreAuthenticatedAuthenticationToken(principal, creds, auths)
+        val userAndCreds = parseHeader(headerValue)
+        val gsAuthorities = Collections.singleton(GeoServerRole.ADMIN_ROLE)
+        val result = new PreAuthenticatedAuthenticationToken(userAndCreds._1, userAndCreds._2, gsAuthorities)
+        SecurityContextHolder.getContext.setAuthentication(result)
       } else {
         sendError(resp)
       }
@@ -31,9 +32,9 @@ class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter
     fc.doFilter(req, resp)
   }
 
-  private def getPrincipalAndCreds(headerValue: String) = {
+  def parseHeader(headerValue: String): (String, java.util.List[String]) = {
     val split = headerValue.split(":")
-    (split(0), split(1).split(","))
+    (split(0), split(1).split(",").toSeq.asJava)
   }
 
   @throws(classOf[IOException])
