@@ -12,7 +12,7 @@
     <bean id="proxiedAuthHeaderFilterProvider" class="geomesa.sec.gs.filter.ProxiedAuthHeaderProvider"/>
 
     <bean id="proxiedAuthHeaderFilterPanelInfo" class="geomesa.sec.gs.filter.ProxiedAuthHeaderFilterPanelInfo">
-        <property name="id" value="security.proxiedAuthHeaderFilter" />
+        <property name="i d" value="security.proxiedAuthHeaderFilter" />
         <property name="shortTitleKey" value="ProxiedAuthHeaderFilterPanel.short"/>
         <property name="titleKey" value="ProxiedAuthHeaderFilterPanel.title"/>
         <property name="descriptionKey" value="ProxiedAuthHeaderFilterPanel.description"/>

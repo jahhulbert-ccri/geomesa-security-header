@@ -1,0 +1,190 @@
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-gwc</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-kml</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-main</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-main</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-main</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-ows</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-ows</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-ows</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-platform</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-platform</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-restconfig</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-rest</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs1_0</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs1_0</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs1_1</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs1_1</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs1_1</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs2_0</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wcs</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wfs</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wfs</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wms</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver</groupId>
+	<artifactId>gs-wms</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.security</groupId>
+	<artifactId>gs-sec-jdbc</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.security</groupId>
+	<artifactId>gs-sec-jdbc</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.security</groupId>
+	<artifactId>gs-sec-ldap</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.security</groupId>
+	<artifactId>gs-sec-ldap</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-core</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-core</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-demo</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-gwc</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-sec-core</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-sec-core</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-sec-jdbc</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-sec-ldap</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-wcs</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-wfs</artifactId>
+	<version>${gs.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.geoserver.web</groupId>
+	<artifactId>gs-web-wms</artifactId>
+	<version>${gs.version}</version>
+</dependency>

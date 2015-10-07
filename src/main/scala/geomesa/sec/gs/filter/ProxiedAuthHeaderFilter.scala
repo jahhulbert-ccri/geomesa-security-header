@@ -1,6 +1,7 @@
 package geomesa.sec.gs.filter
 
 import java.io.IOException
+import java.security.Principal
 import java.util.Collections
 import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
 import javax.servlet.{FilterChain, ServletRequest, ServletResponse}
@@ -9,9 +10,9 @@ import com.typesafe.scalalogging.slf4j.Logging
 import org.geoserver.security.filter.GeoServerRequestHeaderAuthenticationFilter
 import org.geoserver.security.impl.GeoServerRole
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 
-import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
 
 class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter with Logging {
@@ -22,9 +23,9 @@ class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter
         val httpReq = req.asInstanceOf[HttpServletRequest]
         val headerValue = httpReq.getHeader(getPrincipalHeaderAttribute)
         logger.debug(s"ProxiedAuthHeader: $getPrincipalHeaderAttribute=$headerValue")
-        val userAndCreds = parseHeader(headerValue)
+        val proxiedUser = parseHeader(headerValue)
         val gsAuthorities = Collections.singleton(GeoServerRole.ADMIN_ROLE)
-        new PreAuthenticatedAuthenticationToken(userAndCreds._1, userAndCreds._2, gsAuthorities)
+        new PreAuthenticatedAuthenticationToken(proxiedUser, null, gsAuthorities)
       }
     } match {
       case Success(result) =>
@@ -36,9 +37,9 @@ class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter
     }
 
   /** Default implementation is format "user:auth1,auth2,auth3" **/
-  def parseHeader(headerValue: String): (String, java.util.List[String]) = {
+  def parseHeader(headerValue: String): ProxiedUser = {
     val split = headerValue.split(":")
-    (split(0), split(1).split(",").toSeq.asJava)
+    ProxiedUser(split(0), split(1).split(",").toSeq)
   }
 
   @throws(classOf[IOException])
@@ -49,5 +50,9 @@ class ProxiedAuthHeaderFilter extends GeoServerRequestHeaderAuthenticationFilter
     out.println("Error with security you can't get in here buddy.\n")
     out.flush()
   }
+
+}
+
+case class ProxiedUser(userName: String, visibilites: Seq[String]) extends UserDetails {
 
 }
